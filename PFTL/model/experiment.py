@@ -5,11 +5,15 @@ from pathlib import Path
 from PFTL.model.analog_daq import AnalogDAQ
 import yaml
 
+from threading import Thread
+
 
 class Experiment:
     def __init__(self):
         self.config = {}
         self.daq = None
+        self.voltages = np.empty((1, ))
+        self.currents = np.empty((1, ))
 
     def load_config(self, config_file):
         with open(config_file, 'r') as f:
@@ -21,6 +25,10 @@ class Experiment:
 
     def finalise(self):
         self.daq.finalise()
+
+    def start_scan(self):
+        self.scan_thread = Thread(target=self.scan_voltages)
+        self.scan_thread.start()
 
     def scan_voltages(self):
         self.voltages = np.arange(
@@ -72,6 +80,7 @@ if __name__ == '__main__':
     exp = Experiment()
     exp.load_config('Examples/config.yml')
     exp.initialise()
+    exp.config['Scan']['start'] = 2.4
     exp.scan_voltages()
     exp.save_data()
     exp.save_metadata()
