@@ -1,4 +1,4 @@
-from serial_daq import Device
+from PFTL.controller.serial_daq import Device
 import pyvisa
 from time import sleep
 

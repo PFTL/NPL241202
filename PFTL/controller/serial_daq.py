@@ -28,6 +28,7 @@ class Device:
         print(ans)
 
     def set_output(self, channel, value):
+        """ Channel 0 or 1, value integer between 0 and 4095"""
         out = f'OUT:CH{channel} {value}'
         self.query(out)
 
@@ -36,8 +37,6 @@ class Device:
         return int(self.query(out))
 
     def finalise(self):
-        self.set_output(0, 0)
-        self.set_output(1, 0)
         self.dev.close()
 
 
