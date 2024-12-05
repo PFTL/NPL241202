@@ -4,11 +4,18 @@ from PFTL.model.experiment import Experiment
 from PFTL.view.main_window import ScanWindow
 
 
-exp = Experiment()
-exp.load_config('Examples/config.yml')
-exp.initialise()
+def start():
+    exp = Experiment()
+    exp.load_config('Examples/config.yml')
+    exp.initialise()
 
-app = QApplication([])
-win = ScanWindow(exp)  
-win.show()
-app.exec()
+    app = QApplication([])
+    win = ScanWindow(exp)  
+    win.show()
+    app.exec()
+
+    exp.finalise()
+
+
+if __name__ == "__main__":
+    start()

@@ -6,6 +6,7 @@ class AnalogDAQ:
         self.device_number = device_number
 
     def initialise(self):
+        """ Initialises the Arduino on a given port number """
         port = f"COM{self.device_number}" # For Windows
         port = f"/dev/cu.usbmodem{self.device_number}"  # For Mac
         self.driver = Device(port)

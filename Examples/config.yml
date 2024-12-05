@@ -4,6 +4,7 @@ User:
 DAQ:
   port_number: 11201
   resistance: 220
+  model: RealDAQ  # (Or DummyDAQ )
 
 Scan:
   channel_out: 0
